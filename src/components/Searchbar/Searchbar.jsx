@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 import style from './Searchbar.module.css';
 
 class Searchbar extends Component {
@@ -12,17 +13,26 @@ class Searchbar extends Component {
 
   onSubmitValue = ev => {
     ev.preventDefault();
+
+    if (this.state.value === '') {
+      return toast('Ведите свой запрос');
+    }
     this.props.onSubmit(this.state.value);
   };
 
   render() {
     const { value } = this.state;
+    const { onOpen } = this.props;
     const { handleChangeValue, onSubmitValue } = this;
 
     return (
       <header className={style.searchbar}>
         <form className="form" onSubmit={onSubmitValue}>
-          <button type="submit" className={style.btn}>
+          <button
+            type="submit"
+            className={style.btn}
+            // disabled={value !== '' ? false : true}
+          >
             <span className="button-label">Search</span>
           </button>
 

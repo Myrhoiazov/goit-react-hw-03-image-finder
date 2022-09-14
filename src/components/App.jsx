@@ -1,38 +1,43 @@
 import { Component } from 'react';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
-import Button from './Button';
 import axios from 'axios';
-// import Circles from './Loader';
+import Modal from './Modal';
+import { ColorRing } from 'react-loader-spinner';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
-// axios.defaults.baseURL =
-//   'https://pixabay.com/api/?key=29332963-764ea3ce314f104536083404e';
+axios.defaults.baseURL =
+  'https://pixabay.com/api/';
 
 export class App extends Component {
   state = {
     gallery: [],
-    isShow: false,
-    value: '',
+    loader: false,
+    query: '',
     page: 1,
+    imgQuery: null,
+    totalImg: null,
+    perPage: 12,
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     if (
       prevState.page !== this.state.page ||
-      prevState.value !== this.state.value
+      prevState.query !== this.state.query
     ) {
       this.serviceApi();
     }
   }
 
   serviceApi = async () => {
-    const { page, value } = this.state;
+    const { page, query, perPage } = this.state;
 
     try {
+      this.setState({ loader: true });
       const response = await axios.get(
-        `https://pixabay.com/api/?key=29332963-764ea3ce314f104536083404e&q=${value}&image_type=photo&page=${page}&per_page=12`
+        `?key=29332963-764ea3ce314f104536083404e&q=${query}&image_type=photo&page=${page}&per_page=${perPage}`
       );
       this.setState(state => ({
         gallery:
@@ -40,32 +45,57 @@ export class App extends Component {
             ? response.data.hits
             : [...state.gallery, ...response.data.hits],
         isShow: true,
+        totalImg: response.data.total,
       }));
-      console.log(response.data.hits);
-      console.log(this.state);
-    } catch {
-      alert('Error');
+
+      if (response.data.total === 0) {
+        toast.error('По твоему запросу ничего не найдено');
+      }
+    } catch (error) {
+      toast.error('Что то пошло не так :(');
+    } finally {
+      this.setState({ loader: false });
     }
   };
 
-  handelSearcheValue = value => {
-    this.setState({ value, page: 1 });
+  handelSearcheValue = query => {
+    this.setState({ query, page: 1 });
   };
 
   handelClickPage = () => {
     this.setState(state => ({ page: state.page + 1 }));
   };
 
+  isShowModal = crs => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+      imgQuery: crs,
+    }));
+  };
+
   render() {
-    console.log(this.state);
-    const { gallery, isShow } = this.state;
-    const { handelSearcheValue, handelClickPage } = this;
+    const { gallery, showModal, loader, imgQuery, totalImg, page, perPage } =
+      this.state;
+    const { handelSearcheValue, handelClickPage, isShowModal } = this;
 
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
-        <ImageGallery gallery={gallery} />
-        {isShow && <Button onclick={handelClickPage} />}
+        {loader && <ColorRing />}
+        <ImageGallery
+          gallery={gallery}
+          handelClickPage={handelClickPage}
+          onOpen={isShowModal}
+          total={totalImg}
+          page={page}
+          perPage={perPage}
+        />
+        {showModal && (
+          <Modal onClose={isShowModal}>
+            <img src={imgQuery} />
+          </Modal>
+        )}
+        <ToastContainer />
       </div>
     );
   }
