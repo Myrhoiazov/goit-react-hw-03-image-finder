@@ -3,11 +3,13 @@ import ImageGalleryItem from '../ImageGalleryItem';
 import style from './ImageGallery.module.css';
 import Button from '../Button';
 
-
 class ImageGallery extends Component {
+  
   render() {
     const { gallery, handelClickPage, onOpen, total, page, perPage } =
       this.props;
+
+    console.log(gallery);
     return (
       <>
         <ul className={style.gallery}>

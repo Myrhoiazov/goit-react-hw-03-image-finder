@@ -22,17 +22,12 @@ class Searchbar extends Component {
 
   render() {
     const { value } = this.state;
-    const { onOpen } = this.props;
     const { handleChangeValue, onSubmitValue } = this;
 
     return (
       <header className={style.searchbar}>
         <form className="form" onSubmit={onSubmitValue}>
-          <button
-            type="submit"
-            className={style.btn}
-            // disabled={value !== '' ? false : true}
-          >
+          <button type="submit" className={style.btn}>
             <span className="button-label">Search</span>
           </button>
 

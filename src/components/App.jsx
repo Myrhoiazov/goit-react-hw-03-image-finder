@@ -8,8 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 
-
-axios.defaults.baseURL = 'https://pixabay.com/api/';
+axios.defaults.baseURL =
+  'https://pixabay.com/api/';
 
 export class App extends Component {
   state = {
@@ -77,6 +77,7 @@ export class App extends Component {
     const { gallery, showModal, loader, imgQuery, totalImg, page, perPage } =
       this.state;
     const { handelSearcheValue, handelClickPage, isShowModal } = this;
+
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
@@ -88,11 +89,10 @@ export class App extends Component {
           total={totalImg}
           page={page}
           perPage={perPage}
-          className={showModal ? 'overflow' : null}
         />
         {showModal && (
           <Modal onClose={isShowModal}>
-            <img src={imgQuery} style={{ display: 'block',  objectFit: 'cover', maxWidth: '100%', width: '100%', height: '100%'}} />
+            <img src={imgQuery} alt='photo'/>
           </Modal>
         )}
         <ToastContainer />
