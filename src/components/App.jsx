@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import Searchbar from './Searchbar';
+import Loader from './Loader';
 import ImageGallery from './ImageGallery';
 import axios from 'axios';
 import Modal from './Modal';
-import { ThreeDots } from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -88,7 +88,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
-        {loader && <div style={{position:'fixed', top:'0', left:'0', display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0, 0, 0, 0.4)', height:'100vh', width:'100vw'}}><ThreeDots color="#1300ff"/></div>}
+        {loader && <Loader />}
         <ImageGallery
           gallery={gallery}
           handelClickPage={handelClickPage}
