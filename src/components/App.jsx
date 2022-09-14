@@ -77,6 +77,13 @@ export class App extends Component {
     const { gallery, showModal, loader, imgQuery, totalImg, page, perPage } =
       this.state;
     const { handelSearcheValue, handelClickPage, isShowModal } = this;
+
+    // const body = document.querySelector('body');
+    // if (showModal) {
+    //   {body style = {{overflow:'hidden'}}}
+
+    // }
+
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
