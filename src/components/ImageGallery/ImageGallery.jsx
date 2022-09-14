@@ -4,10 +4,8 @@ import style from './ImageGallery.module.css';
 import Button from '../Button';
 
 class ImageGallery extends Component {
-
   render() {
-    const { gallery, handelClickPage, onOpen, total, page, perPage } =
-      this.props;
+    const { gallery, onLoadMore, onOpen, total, page, perPage } = this.props;
     return (
       <>
         <ul className={style.gallery}>
@@ -15,7 +13,7 @@ class ImageGallery extends Component {
             <ImageGalleryItem item={item} key={item.id} onOpen={onOpen} />
           ))}
         </ul>
-        {page * perPage < total && <Button onclick={handelClickPage} />}
+        {page * perPage < total && <Button onclick={onLoadMore} />}
       </>
     );
   }

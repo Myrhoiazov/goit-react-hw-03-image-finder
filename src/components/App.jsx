@@ -91,7 +91,7 @@ export class App extends Component {
         {loader && <Loader />}
         <ImageGallery
           gallery={gallery}
-          handelClickPage={handelClickPage}
+          onLoadMore={handelClickPage}
           onOpen={isShowModal}
           total={totalImg}
           page={page}

@@ -1,8 +1,6 @@
 import style from './Loader.module.css';
 import { ThreeDots } from 'react-loader-spinner';
 
-console.log(style);
-
 function Loader() {
   return (
     <div className={style.wrapper}>
