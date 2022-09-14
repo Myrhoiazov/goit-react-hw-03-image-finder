@@ -88,7 +88,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
-        {loader && <ThreeDots color="#1300ff"/>}
+        {loader && <div style={{position:'fixed', top:'0', left:'0', display:'flex', justifyContent:'center', alignItems:'center', backgroundColor:'rgba(0, 0, 0, 0.4)', height:'100vh', width:'100vw'}}><ThreeDots color="#1300ff"/></div>}
         <ImageGallery
           gallery={gallery}
           handelClickPage={handelClickPage}
