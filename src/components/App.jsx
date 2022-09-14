@@ -3,10 +3,10 @@ import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import axios from 'axios';
 import Modal from './Modal';
-import { ColorRing } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
@@ -36,7 +36,7 @@ export class App extends Component {
     try {
       this.setState({ loader: true });
       const response = await axios.get(
-        `?key=29332963-764ea3ce314f104536083404e&q=${query}&image_type=photo&page=${page}&per_page=${perPage}`
+        `?key=29332963-764ea3ce314f104536083404e&q=${query}&image_type=photo&orientation=horizontal&page=${page}&per_page=${perPage}`
       );
       this.setState(state => ({
         gallery:
@@ -88,7 +88,7 @@ export class App extends Component {
     return (
       <div>
         <Searchbar onSubmit={handelSearcheValue} />
-        {loader && <ColorRing />}
+        {loader && <ThreeDots color="#1300ff"/>}
         <ImageGallery
           gallery={gallery}
           handelClickPage={handelClickPage}
@@ -102,7 +102,13 @@ export class App extends Component {
             <img
               src={imgQuery}
               alt={query}
-              style={{ display: 'block', objectFit: 'cover', maxWidth: '100%', width: '100%', height: '100%'}}
+              style={{
+                display: 'block',
+                objectFit: 'cover',
+                maxWidth: '100%',
+                width: '100%',
+                height: '100%',
+              }}
             />
           </Modal>
         )}
