@@ -7,9 +7,20 @@
 
 .btn {
   display: inline-block;
-  padding: 10px 10px;
+  min-width: 120px;
+
+  padding: 15px 10px;
   border: none;
   border-radius: 5px;
+  color: white;
 
   cursor: pointer;
+  background-color: rgb(120, 6, 133);
+
+  transition: all ease-in 150ms;
+}
+
+.btn:hover{
+  background-color: rgb(180, 15, 198);
+
 }
