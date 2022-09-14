@@ -9,7 +9,7 @@ const ImageGalleryItem = ({ item, onOpen }) => {
           alt=""
           width="300"
           className={style.image}
-          onClick={() =>onOpen(item.largeImageURL)}
+          onClick={() =>onOpen(item.webformatURL)}
         />
       </li>
     </>
