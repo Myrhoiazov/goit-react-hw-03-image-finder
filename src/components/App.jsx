@@ -92,7 +92,7 @@ export class App extends Component {
         />
         {showModal && (
           <Modal onClose={isShowModal}>
-            <img src={imgQuery} alt='photo'/>
+            <img src={imgQuery} alt={query}/>
           </Modal>
         )}
         <ToastContainer />
