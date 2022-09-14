@@ -74,7 +74,7 @@ export class App extends Component {
   };
 
   render() {
-    const { gallery, showModal, loader, imgQuery, totalImg, page, perPage } =
+    const { gallery, showModal, loader, imgQuery, totalImg, page, perPage, query } =
       this.state;
     const { handelSearcheValue, handelClickPage, isShowModal } = this;
 
